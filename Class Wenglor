@@ -1,0 +1,64 @@
+#pragma once
+// Header files
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+// Opencv header files
+#include <opencv/cv.h>
+#include <opencv2/highgui/highgui.hpp>
+
+// Event handler header files
+#include "library/eventhandlers/Event.h"
+#include "library/eventhandlers/EventHandler.h"
+
+//======================================================================================================================//
+///Wenglor Class Declaration
+//======================================================================================================================//
+
+class Wenglor
+{
+public:
+	//Eventhandler declaration
+	eventhandlers::Event<cv::Mat> processEvent;
+	//eventhandlers::Event<cv::Mat> fireEvent;
+
+	//Constructor
+	Wenglor();
+
+	//Destructor
+	~Wenglor();
+
+	//Establishing Connection
+	void Connect();
+
+	//Check connection
+	void ConsolidateScannerConnection();
+
+	//Start acquisition
+	void Start();
+
+	//Capturing the line
+	void Run();
+
+	//Stop acquisition
+	void Stop();
+
+	//Closing the connection
+	void Disconnect();
+
+	//To control scanner
+	bool activeScanner;
+	bool GetScannerActive();
+	void SetScannerActive();
+	void SetScannerInactive();
+
+	//pointer for connect function
+	void* scanner;
+
+	//runthread object pointer declaration
+	std::shared_ptr < std::thread > runThread; 
+
+private:
+	cv::Mat image;
+};
